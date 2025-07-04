@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>บอกรักอ้วน พร้อมเพลงท่อนหวาน 💕</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Kanit', sans-serif;
+    background: linear-gradient(135deg, #f9d5e5, #fcbad3);
+    color: #4a2c58;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .container {
+    background: rgba(255 255 255 / 0.95);
+    border-radius: 20px;
+    padding: 30px 40px;
+    max-width: 900px;
+    box-shadow: 0 8px 25px rgba(204, 105, 158, 0.5);
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .left, .right {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 2.6rem;
+    margin-bottom: 0.3em;
+    color: #a43e7a;
+    text-shadow: 1px 1px 3px #f9c7e1;
+  }
+  p.love-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+    font-weight: 500;
+  }
+  .heart {
+    font-size: 3rem;
+    color: #e83e8c;
+    margin: 20px 0 10px 0;
+    animation: beat 1s infinite alternate;
+  }
+  @keyframes beat {
+    0% { transform: scale(1);}
+    100% { transform: scale(1.2);}
+  }
+  #player {
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+    width: 100%;
+    height: 180px;
+  }
+  .lyrics-box {
+    background: #fce4ec;
+    border-radius: 15px;
+    padding: 15px 20px;
+    height: 200px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px #f9c7e1;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #6a2c4e;
+    white-space: pre-wrap;
+    user-select: text;
+    margin-top: 15px;
+  }
+  /* scrollbar style */
+  .lyrics-box::-webkit-scrollbar {
+    width: 8px;
+  }
+  .lyrics-box::-webkit-scrollbar-thumb {
+    background-color: #e573ab;
+    border-radius: 4px;
+  }
+  .lyrics-box::-webkit-scrollbar-track {
+    background: #fce4ec;
+  }
+
+  @media (max-width: 750px) {
+    .container {
+      flex-direction: column;
+      max-width: 90vw;
+    }
+    .left, .right {
+      flex: unset;
+      width: 100%;
+    }
+    .lyrics-box {
+      height: 150px;
+      margin-top: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="บอกรักพร้อมเพลงและเนื้อเพลง">
+    <div class="left">
+      <h1>สำหรับอ้วนนะ 💕</h1>
+      <p class="love-text" tabindex="0">
+        เค้ารักอ้วนนะ รักมากๆเลย<br />
+        เค้าไม่เคยเปลี่ยนใจไปรักใครอื่นนอกจากอ้วนเลยนะ<br />
+        เค้ารักอ้วนมากๆ อีก 3 ปี ก็จะได้อยู่ด้วยกันแล้วน้าาา<br />
+        อย่าพึ่งทิ้งเค้านะคะ อ้วน อดทนอีกสักน่อยได้มั้ย<br />
+        อีกไม่นานเราก็จะได้ใช้ชีวิตคู่ด้วยกันแล้ว<br />
+        อย่ารีบจากเค้าไปไหนนะคะอ้วน เค้ารักอ้วนมากๆเลยนะคะ<br />
+        ตอนนี้อ้วนลับไปแล้วแต่เค้ายังไม่หลับ<br />
+        เค้ามานั่งเขียนโค้ดนี้ให้อ้วนน่ะะ<br />
+        รักมากๆๆ รักมากๆจริงๆ 💕💐
+      </p>
+      <div class="heart" aria-hidden="true">❤️</div>
+    </div>
+    <div class="right">
+      <div id="player" aria-label="วิดีโอเพลง"></div>
+      <div class="lyrics-box" aria-label="เนื้อเพลง" tabindex="0">
+        ที่ฉันรักเธอ เป็นของจริง และยังจริงอย่างนั้น<br/>
+        เก็บไว้ให้เธอ เมื่อพบกัน<br/>
+        คนที่รอในฝัน
+      </div>
+    </div>
+  </div>
+
+<script>
+  // โหลด YouTube IFrame API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'toLfpAT9QlM', // รหัสวิดีโอ YouTube
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        start: 30,    // เริ่มเล่นที่วินาทีที่ 30 (ปรับได้)
+        end: 50,      // หยุดเล่นที่วินาทีที่ 50 (ปรับได้)
+        loop: 1,
+        playlist: 'toLfpAT9QlM',
+        modestbranding: 1,
+        rel: 0,
+        disablekb: 1,
+        iv_load_policy: 3,
+      },
+      events: {
+        'onReady': function(event) {
+          event.target.mute(); // ถ้าอยากให้เล่นเสียง ให้ลบบรรทัดนี้
+          event.target.playVideo();
+        },
+        'onStateChange': function(event) {
+          // ถ้าเล่นจบ (ENDED) ให้เล่นใหม่ (loop)
+          if(event.data === YT.PlayerState.ENDED) {
+            player.seekTo(30); // กลับไปเริ่มต้นท่อนที่กำหนด
+          }
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
